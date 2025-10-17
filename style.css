@@ -1,0 +1,339 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
+:root {
+    /* Tipografía */
+    --font-family-main: 'Space Grotesk', sans-serif;
+    
+    /* Colores principales */
+    --color-body-bg: #1e2f48;
+    --color-container-bg: #020617;
+    --color-item-bg: #0b1a2b;
+    --color-text-white: #fff;
+    --color-text-los-angeles: #7df7ff;
+  
+    /* Gradientes */
+    --gradient-prism: linear-gradient(
+      95deg,
+      #e44d3e 3.8%,
+      #ff7823 23.01%,
+      #ffcd57 42.22%,
+      #f5feff 61.43%,
+      #3be5ff 80.64%,
+      #001bcc 99.85%
+    );
+    --gradient-number: linear-gradient(
+      90deg,
+      #fa0 1.83%,
+      #ffc25b 18.19%,
+      #ffcb66 34.55%,
+      #ffae52 50.92%,
+      #ff913d 67.28%,
+      #ff8353 83.64%,
+      #ff746b 100%
+    );
+  
+    /* Colores de los círculos */
+    --circle-1: #ed5d45;
+    --circle-2: #f2b655;
+    --circle-3: #2bb8d4;
+    --circle-4: #3f7dde;
+  
+    /* Tamaños y espaciamiento */
+    --radius-global: 8px;
+    --spacing-default: 1rem;
+    
+    /* Tamaños de fuente */
+    --font-size-large: 69px;
+    --font-size-medium: 36px;
+    --font-size-regular: 28px;
+    --font-size-small: 10px;
+  }
+  
+
+/* 
+  1. RESET BÁSICO Y ESTILOS GLOBALES
+-------------------------------------------------- */
+body {
+    margin: 0;
+    font-family: var(--font-family-main);
+    background-color: var(--color-body-bg);
+  }
+  
+  img {
+    display: block;
+    max-width: 100%;
+  }
+  
+  p, ul {
+    margin: 0;
+    padding: 0;
+  }
+  
+  ul {
+    list-style: none;
+  }
+  
+  /* 
+    2. CONTENEDOR PRINCIPAL
+  -------------------------------------------------- */
+  .container {
+    display: grid;
+    place-content: center;
+    max-width: 600px; 
+    margin: 0 auto;
+    background-color: var(--color-container-bg);
+    padding: var(--spacing-default);
+    border-radius: var(--radius-global);
+  }
+  
+  /* 
+    3. GRID CONTAINER PARA LAS SECCIONES
+  -------------------------------------------------- */
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+    grid-template-areas:
+      'prism-star prism-star photo prism-white'
+      'prism-star prism-star photo grotesk'
+      'prism-star prism-star photo grotesk'
+      'prism-star prism-star cover cover'
+      'los-angeles los-angeles cover cover';
+  }
+
+  @media (max-width: 768px) {
+    .grid-container {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-areas:
+        "prism-star photo"
+        "prism-star photo"
+        "prism-white grotesk"
+        "cover los-angeles"
+        "cover los-angeles";
+    }
+}  
+  
+  /* 
+    4. ESTILOS GENERALES PARA .item (EXCEPTO .los-angeles)
+  -------------------------------------------------- */
+  .item:not(.los-angeles) {
+    position: relative;
+    background-color: var(--color-item-bg);
+    border-radius: var(--radius-global);
+    background-image:
+      url('/assets/noise2.png'),
+      url('/assets/noise.png'),
+      linear-gradient(
+        136deg,
+        rgba(255, 255, 255, 0.2) 0%,
+        rgba(255, 255, 255, 0) 100%
+      );
+  }
+  
+  .item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('/assets/noise3.png');
+    opacity: 0.2;
+    pointer-events: none;
+    border-radius: var(--radius-global);
+  }
+  .item:hover{
+    transition: .2s ease;
+    transform: scale(1.01);
+    }
+  
+  /* 
+    5. SECCIÓN PRISM-STAR
+  -------------------------------------------------- */
+  .prism-star {
+    grid-area: prism-star;
+    position: relative;
+    font-weight: 500;
+    padding: var(--spacing-default);
+  }
+  
+  .prism-star .prism {
+    font-size: var(--font-size-large);
+    margin: 0;
+    line-height: 0.9;
+  }
+  
+  /* Texto con degradado en el contorno */
+  .prism-star .prism:not(.gradient-text) {
+    color: var(--color-item-bg);
+    background: var(--gradient-prism);
+    -webkit-background-clip: text;
+    -webkit-text-stroke: 2px transparent;
+  }
+  
+  .prism-star img {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    display: block;
+  }
+  
+  /* 
+    6. SECCIÓN PHOTO
+  -------------------------------------------------- */
+  .photo {
+    grid-area: photo;
+    min-width: 9.75rem; 
+    overflow: hidden;
+  }
+  
+  .photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    mix-blend-mode: screen;
+    aspect-ratio: 2 / 1;
+  }
+  
+  /* 
+    7. SECCIÓN PRISM-WHITE
+  -------------------------------------------------- */
+  .prism-white {
+    grid-area: prism-white;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--font-size-medium);
+    font-weight: 500;
+    color: var(--color-text-white);
+  }
+  
+  .prism-white span {
+    display: inline-block;
+  }
+  
+  /* Barra degradada interna */
+  .prism-white .bar {
+    display: block;
+    width: 100%;
+    max-width: 150px;
+    height: 6px;
+    margin: 0 auto;
+    background: var(--gradient-prism);
+  }
+  
+  /* 
+    8. SECCIÓN LOS-ANGELES
+  -------------------------------------------------- */
+  .los-angeles {
+    grid-area: los-angeles;
+    position: relative;
+  }
+  
+  .los-angeles img {
+    width: 100%;
+  }
+  
+  .los-angeles p {
+    font-size: var(--font-size-small);
+    color: var(--color-text-los-angeles);
+    position: absolute;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .los-angeles .sub {
+    opacity: 0.5;
+  }
+  
+  /* 
+    9. SECCIÓN GROTESK
+  -------------------------------------------------- */
+  .grotesk {
+    grid-area: grotesk;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .grotesk p {
+    font-size: var(--font-size-regular);
+    font-weight: 500;
+    color: var(--color-text-white);
+    line-height: 1.2;
+  }
+  
+  /* 
+    10. GROTESK-CIRCLE
+  -------------------------------------------------- */
+  .grotesk-circle {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .grotesk-circle li {
+    width: 44px;
+    aspect-ratio: 1 / 1;
+    border-radius: 9999px;
+  }
+  
+  /* Usa variables para los colores de cada círculo */
+  .grotesk-circle li:nth-child(1) { background-color: var(--circle-1); }
+  .grotesk-circle li:nth-child(2) { background-color: var(--circle-2); }
+  .grotesk-circle li:nth-child(3) { background-color: var(--circle-3); }
+  .grotesk-circle li:nth-child(4) { background-color: var(--circle-4); }
+  
+  /* Superpone ligeramente los círculos */
+  .grotesk-circle > * + * {
+    margin-left: -1rem;
+    outline: 2px solid var(--color-body-bg);
+  }
+  
+  /* 
+    11. SECCIÓN COVER
+  -------------------------------------------------- */
+  .cover {
+    grid-area: cover;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.2rem;
+    padding: 20px;
+    align-items: center;
+  }
+  
+  .cover .gradient-number {
+    font-size: 52px; 
+    font-weight: 500;
+  }
+  
+  .cover p {
+    font-size: var(--font-size-small);
+    color: var(--color-text-white);
+  }
+  
+  .cover img {
+    min-width: 156px;
+  }
+  
+  /* 
+    12. UTILIDADES: CLASES GENÉRICAS
+  -------------------------------------------------- */
+  .gradient-text {
+    background: var(--gradient-prism);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .gradient-number {
+    background: var(--gradient-number);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
