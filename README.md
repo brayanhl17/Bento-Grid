@@ -25,13 +25,13 @@ Este proyecto demuestra cómo estructurar un layout estilo “bento” usando so
 ---
 
 ## Capturas
-![Bento Desktop](Images/Preview.png) 
+![Bento Desktop](Images/Preview.PNG) 
 
 
 ---
 
 ## Demo
-
+https://brayanhl17.github.io/Bento-Grid
 
 ---
 
